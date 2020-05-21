@@ -1,25 +1,29 @@
 ---
 layout: null
-sitemap: true
 ---
-<?xml version="1.0" encoding="utf-8"?>
-<search>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {% for post in site.posts %}
-    <entry>
-      <title><![CDATA[{{ post.title | strip_html }}]]></title>
-      <url>{{ post.url | relative_url }}</url>
-      <content type="text"><![CDATA[{{ post.content | strip_html | strip_newlines }}]]></content>
-      <categories>
-        {% for category in post.categories %}
-          <category> {{ category | strip_html | xml_escape }} </category>
-        {% endfor %}
-      </categories>
-      <tags>
-        {% for tag in post.tags %}
-          <tag> {{ tag | strip_html | xml_escape }} </tag>
-        {% endfor %}
-      </tags>
-      <tags></tags>
-    </entry>
+    <url>
+      <loc>{{ site.url }}{{ post.url }}</loc>
+      {% if post.lastmod == null %}
+        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+      {% else %}
+        <lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
+      {% endif %}
+
+      {% if post.sitemap.changefreq == null %}
+        <changefreq>weekly</changefreq>
+      {% else %}
+        <changefreq>{{ post.sitemap.changefreq }}</changefreq>
+      {% endif %}
+
+      {% if post.sitemap.priority == null %}
+          <priority>1.0</priority>
+      {% else %}
+        <priority>{{ post.sitemap.priority }}</priority>
+      {% endif %}
+
+    </url>
   {% endfor %}
-</search>
+</urlset>
