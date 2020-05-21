@@ -5,7 +5,7 @@
 
 # Site
 title: 주섬주섬
-subtitle: 뒤적뒤적 주섬주섬 짠!
+subtitle: 
 description: 
 author: Park Sangho
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
@@ -277,7 +277,7 @@ sidebar:
   b2t: true
 
   # Scroll percent label in b2t button
-  scrollpercent: true
+  scrollpercent: false
 
 
 # Blog rolls
