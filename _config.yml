@@ -108,8 +108,8 @@ canonical: true
 seo: false
 
 # If true, will add site-subtitle to index page, added in jekyll config.
-subtitle: Subtitle
-index_with_subtitle: true
+#subtitle: Subtitle
+#index_with_subtitle: false
 
 # ---------------------------------------------------------------
 # Menu Settings
