@@ -135,11 +135,11 @@ menu_icons:
   enable: false
   #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
   home: home
-  about: user
-  categories: th
+  about: about
+  categories: categories
   schedule: calendar
   tags: tags
-  archives: archive
+  archives: archives
   sitemap: sitemap
   commonweal: heartbeat
 
