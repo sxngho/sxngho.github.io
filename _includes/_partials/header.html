@@ -44,7 +44,7 @@
         {% assign path = name_path[1] %}
         {% assign itemName = name | downcase %}
         <li class="menu-item menu-item-{{ itemName }}" style="display:inline-block">
-          <a href="{{ path | relative_url }}" rel="section">
+          <a href="{{ path | relative_url }}" style="padding:5px 3px" rel="section">
             {% if site.menu_icons.enable %}
 	  <img src="/assets/images/menus/{{site.menu_icons[itemName]}}.png" width="32" height="32">
             {% endif %}
