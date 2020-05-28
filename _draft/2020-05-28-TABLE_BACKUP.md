@@ -14,7 +14,7 @@ tags:
 
 CREATE TABLE [백업 테이블 명]AS SELECT * FROM [원본 테이블 명]
 
-- CREATE TABLE  Student_backup AS SELECT * FROM Student
+> CREATE TABLE  Student_backup AS SELECT * FROM Student
 
 ### 테이블 백업 시 주의사항
 
@@ -24,15 +24,14 @@ Primary Key 나 Index 등 Constraint 는 복제되지 않습니다.
 
 ## 테이블 복원 방법
 
-delete from [원본 테이블 명]
+DELETE FROM [원본 테이블 명]
 
-- delete from Student
+> DELETE FROM Student
 
-insert into [원본 테이블 명] select * from [백업 테이블 명]
+INSERT INTO [원본 테이블 명] SELECT * FROM [백업 테이블 명]
+> INSERT INTO Student SELECT * FROM Student_backup
 
-- INSERT INTO Student SELECT * FROM Student_backup
-
-### 백업 테이블의 속도만 현저하게 느린현상
+## 백업 테이블의 속도만 현저하게 느린현상
 
 : Constraint가 복제되지 않는다는 것은 PK와 INDEX가 없다는 것이고
 
@@ -42,27 +41,20 @@ INDEX가 없는 테이블은 CRUD 속도는 매우매우매우 느리다.
 
 실제로 백업테이블을 조회해보니 PK가 설정되어있지 않았다.
 
-**SELECT C.COLUMN_NAME FROM USER_CONS_COLUMNS C, USER_CONSTRAINTS S**
-
-**WHERE C.CONSTRAINT_NAME = S.CONSTRAINT_NAME AND S.CONSTRAINT_TYPE = 'P'**
-
-**AND C.TABLE_NAME = [TABLE_NAME]**
-
-- **SELECT C.COLUMN_NAME FROM USER_CONS_COLUMNS C, USER_CONSTRAINTS S**
-
-**WHERE C.CONSTRAINT_NAME = S.CONSTRAINT_NAME AND S.CONSTRAINT_TYPE = 'P'**
-
-**AND C.TABLE_NAME = 'Student_backup'**
+SELECT C.COLUMN_NAME FROM USER_CONS_COLUMNS C, USER_CONSTRAINTS S
+WHERE C.CONSTRAINT_NAME = S.CONSTRAINT_NAME AND S.CONSTRAINT_TYPE = 'P'
+AND C.TABLE_NAME = [TABLE_NAME]
+> SELECT C.COLUMN_NAME FROM USER_CONS_COLUMNS C, USER_CONSTRAINTS S 
+WHERE C.CONSTRAINT_NAME = S.CONSTRAINT_NAME AND S.CONSTRAINT_TYPE = 'P'
+AND C.TABLE_NAME = 'Student_backup'
 
 이미 만들어진 테이블에 PK를 부여하고자 할때,
 
 SELECT * FROM USER_INDEXES WHERE TABLE_NAME = [TABLE_NAME]
-
-- SELECT * FROM USER_INDEXES WHERE TABLE_NAME = 'Student_backup'
+> SELECT * FROM USER_INDEXES WHERE TABLE_NAME = 'Student_backup'
 
 ALTER TABLE [TABLE_NAME] ADD CONSTRAINT [TABLE_PK_NAME] PRIMARY KEY([PK COLUMN NAME])
-
-- ALTER TABLE 'Student_backup' ADD CONSTRAINT 'Student_backup_PK' PRIMARY KEY('StudentNo')
+> ALTER TABLE 'Student_backup' ADD CONSTRAINT 'Student_backup_PK' PRIMARY KEY('StudentNo')
 
 다음과 같은 쿼리로 PK를 부여해주었더니 INDEX가 생겨 백업테이블의 CRUD 속도가 정상적으로 나왔다.
 
