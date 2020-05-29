@@ -27,14 +27,10 @@ Primary Key 나 Index 등 **Constraint 는 복제되지 않습니다.**
 ## 테이블 복원 방법
 ```sql
 DELETE FROM [원본 테이블 명]
-```
-```sql
-DELETE FROM Student
-```
-```sql
 INSERT INTO [원본 테이블 명] SELECT * FROM [백업 테이블 명]
 ```
 ```sql
+DELETE FROM Student
 INSERT INTO Student SELECT * FROM Student_backup
 ```
 
