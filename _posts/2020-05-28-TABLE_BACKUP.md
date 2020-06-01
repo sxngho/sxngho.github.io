@@ -69,7 +69,7 @@ SELECT * FROM USER_INDEXES WHERE TABLE_NAME = 'Student_backup'
 ALTER TABLE [TABLE_NAME] ADD CONSTRAINT [TABLE_PK_NAME] PRIMARY KEY([PK COLUMN NAME])
 ```
 ```sql
-ALTER TABLE 'Student_backup' ADD CONSTRAINT 'Student_backup_PK' PRIMARY KEY('StudentNo')
+ALTER TABLE Student_backup ADD CONSTRAINT Student_backup_PK PRIMARY KEY(StudentNo)
 ```
 
 다음과 같은 쿼리로 PK를 부여해주었더니 INDEX가 생겨 백업테이블의 CRUD 속도가 정상적으로 나왔다.
